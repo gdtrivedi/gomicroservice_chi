@@ -1,0 +1,12 @@
+# github.com/go-chi/chi v4.0.3+incompatible
+## explicit
+github.com/go-chi/chi
+# github.com/go-chi/chi/v5 v5.0.7
+## explicit; go 1.14
+github.com/go-chi/chi/v5
+github.com/go-chi/chi/v5/middleware
+# github.com/go-chi/docgen v1.2.0
+## explicit; go 1.15
+# github.com/go-chi/render v1.0.1
+## explicit
+github.com/go-chi/render
