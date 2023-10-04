@@ -28,8 +28,16 @@ type CfZoneInfo struct {
 	CfZoneID         string   `json:"cf_zone_id,omitempty"`
 }
 
+type CommaSeparatedRes struct {
+	Value string
+}
+
 // Render renders a CustomHostnameRecord to the http.ResponseWriter.
 func (r *ServiceInfoResponse) Render(w http.ResponseWriter, req *http.Request) error {
+	return nil
+}
+
+func (r *CommaSeparatedRes) Render(w http.ResponseWriter, req *http.Request) error {
 	return nil
 }
 
@@ -48,8 +56,11 @@ func main() {
 		r.Get("/{zone_name}", GetZoneServiceInfo) // GET /articles/search
 	})
 
-	http.ListenAndServe(":3333", r)
+	r.Get("/array_test", GetArrayTest)
+
 	fmt.Println("listening.....")
+	http.ListenAndServe(":3333", r)
+
 }
 
 func GetZoneServiceInfo(writer http.ResponseWriter, request *http.Request) {
@@ -74,6 +85,13 @@ func GetZoneServiceInfo(writer http.ResponseWriter, request *http.Request) {
 		}
 		render.Render(writer, request, res)
 	}
+}
+
+func GetArrayTest(writer http.ResponseWriter, request *http.Request) {
+	status := request.URL.Query()["status"]
+
+	res := &CommaSeparatedRes{Value: strings.Join(status, ",")}
+	render.Render(writer, request, res)
 }
 
 func GetAllServiceInfo(writer http.ResponseWriter, request *http.Request) {
